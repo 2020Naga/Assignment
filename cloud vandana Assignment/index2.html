@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Slider</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* For positioning buttons */
+}
+
+#sliderImage {
+    max-width: 500px;
+    max-height: 300px;
+    display: block; /* Prevents small space below image */
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#prevButton {
+    left: 0;
+}
+
+#nextButton {
+    right: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <button id="prevButton">&lt;</button>
+  <img id="sliderImage" src="" alt="Slider Image">
+  <button id="nextButton">&gt;</button>
+</div>
+
+<script>
+const images = [
+  "pizza.jpg",
+  "fries.jpg",
+  "egg biryani.jpg",
+  // Add more image URLs here
+];
+let currentImage = 0;
+
+const sliderImage = document.getElementById("sliderImage");
+const prevButton = document.getElementById("prevButton");
+const nextButton = document.getElementById("nextButton");
+
+
+function showImage(index) {
+    sliderImage.src = images[index];
+}
+
+prevButton.addEventListener("click", () => {
+    currentImage = (currentImage - 1 + images.length) % images.length; // Wrap around
+    showImage(currentImage);
+});
+
+nextButton.addEventListener("click", () => {
+    currentImage = (currentImage + 1) % images.length; // Wrap around
+    showImage(currentImage);
+});
+
+
+showImage(currentImage); // Show the first image initially
+</script>
+
+</body>
+</html>
